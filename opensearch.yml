@@ -14,13 +14,13 @@
 #
 # Use a descriptive name for your cluster:
 #
-cluster.name: test-application
+#cluster.name: my-application
 #
 # ------------------------------------ Node ------------------------------------
 #
 # Use a descriptive name for the node:
 #
-node.name: node-1
+#node.name: node-1
 #
 # Add custom attributes to the node:
 #
@@ -88,3 +88,5 @@ node.name: node-1
 #action.destructive_requires_name: true
 
 plugins.security.disabled: true
+
+plugins.ml_commons.only_run_on_ml_node: false
