@@ -1,0 +1,1306 @@
+{
+	"info": {
+		"_postman_id": "c2dba53a-0ab4-4409-9fdc-4ee66210b36f",
+		"name": "OpenSearch plugin k-NN",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12251772"
+	},
+	"item": [
+		{
+			"name": "Model management",
+			"item": [
+				{
+					"name": "Upload external neural model",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"all-MiniLM-L6-v2\",\n  \"version\": \"1.0.0\",\n  \"description\": \"testing neural model from url\",\n  \"model_format\": \"TORCH_SCRIPT\",\n  \"model_config\": {\n    \"model_type\": \"bert\",\n    \"embedding_dimension\": 384,\n    \"framework_type\": \"sentence_transformers\"\n  },\n  \"url\": \"https://github.com/opensearch-project/ml-commons/raw/2.x/ml-algorithms/src/test/resources/org/opensearch/ml/engine/algorithms/text_embedding/all-MiniLM-L6-v2_torchscript_sentence-transformer.zip?raw=true\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9200/_plugins/_ml/models/_upload",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"_plugins",
+								"_ml",
+								"models",
+								"_upload"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get neural model id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:9200/_plugins/_ml/tasks/fTDQNYYBFQYSzNBN9WC6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"_plugins",
+								"_ml",
+								"tasks",
+								"fTDQNYYBFQYSzNBN9WC6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all models",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"query\": {\n    \"match_all\": {}\n  },\n  \"size\": 1000\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9200/_plugins/_ml/models/_search",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"_plugins",
+								"_ml",
+								"models",
+								"_search"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Load neural model from model index",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9200/_plugins/_ml/models/fjDQNYYBFQYSzNBN9WD6/_load",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"_plugins",
+								"_ml",
+								"models",
+								"fjDQNYYBFQYSzNBN9WD6",
+								"_load"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Check neural model load status",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9200/_plugins/_ml/tasks/fzDRNYYBFQYSzNBNhmBB",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"_plugins",
+								"_ml",
+								"tasks",
+								"fzDRNYYBFQYSzNBNhmBB"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Unload neural model from model index",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:9200/_plugins/_ml/models/k4GPzoQBp3AxOxLQdpVy/_unload",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"_plugins",
+								"_ml",
+								"models",
+								"k4GPzoQBp3AxOxLQdpVy",
+								"_unload"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Directly make inference with neural model",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"text_docs\":[ \"today is sunny\"],\n  \"return_number\": true,\n  \"target_response\": [\"sentence_embedding\"]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9200/_plugins/_ml/_predict/text_embedding/fjDQNYYBFQYSzNBN9WD6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"_plugins",
+								"_ml",
+								"_predict",
+								"text_embedding",
+								"fjDQNYYBFQYSzNBN9WD6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete model",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9200/_plugins/_ml/models/AtXGNYYB98v_cnvfxYMC",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"_plugins",
+								"_ml",
+								"models",
+								"AtXGNYYB98v_cnvfxYMC"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Warmup",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9200/_plugins/_knn/warmup/my_neural_index?pretty",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"_plugins",
+								"_knn",
+								"warmup",
+								"my_neural_index"
+							],
+							"query": [
+								{
+									"key": "pretty",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pipeline",
+			"item": [
+				{
+					"name": "Ingest pipeline",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"description\": \"An example neural search pipeline\",\n  \"processors\" : [\n    {\n      \"text_embedding\": {\n        \"model_id\": \"fjDQNYYBFQYSzNBN9WD6\",\n        \"field_map\": {\n           \"general_text\": \"general_text_knn\"\n        }\n      }\n    }\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9200/_ingest/pipeline/neural_pipeline",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"_ingest",
+								"pipeline",
+								"neural_pipeline"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ingest pipeline multiple vector fields",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"description\": \"An example of a second neural search pipeline\",\n  \"processors\" : [\n    {\n      \"text_embedding\": {\n        \"model_id\": \"TGYn0oQBAmnD50pybv0T\",\n        \"field_map\": {\n           \"general_text\": \"general_text_knn\",\n           \"second_general_text\": \"second_general_text_knn\"\n        }\n      }\n    }\n  ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9200/_ingest/pipeline/neural_pipeline_second_field",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"_ingest",
+								"pipeline",
+								"neural_pipeline_second_field"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get ingest pipeline",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9200/_ingest/pipeline/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"_ingest",
+								"pipeline",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete ingest pipeline",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9200/_ingest/pipeline/neural_pipeline_second_field",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"_ingest",
+								"pipeline",
+								"neural_pipeline_second_field"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Index",
+			"item": [
+				{
+					"name": "Create neural index",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"settings\": {\n        \"index.knn\": true,\n        \"default_pipeline\": \"neural_pipeline\"\n    },\n    \"mappings\": {\n        \"properties\": {\n            \"general_text_knn\": {\n                \"type\": \"knn_vector\",\n                \"dimension\": 384,\n                \"method\": {\n                    \"name\": \"hnsw\",\n                    \"engine\": \"Lucene\"\n                }\n            },\n            \"general_text\": { \n                \"type\": \"text\"            \n            },\n            \"color\": {\n                \"type\": \"text\"\n            }\n        }\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9200/my_neural_index",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"my_neural_index"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create neural index multiple vector fields",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"settings\": {\n        \"index.knn\": true,\n        \"default_pipeline\": \"neural_pipeline_second_field\"\n    },\n    \"mappings\": {\n        \"properties\": {\n            \"general_text_knn\": {\n                \"type\": \"knn_vector\",\n                \"dimension\": 384,\n                \"method\": {\n                    \"name\": \"hnsw\",\n                    \"engine\": \"Lucene\"\n                }\n            },\n            \"second_general_text_knn\": {\n                \"type\": \"knn_vector\",\n                \"dimension\": 384,\n                \"method\": {\n                    \"name\": \"hnsw\",\n                    \"engine\": \"Lucene\"\n                }\n            },\n            \"general_text\": {\n                \"type\": \"text\"\n            },\n            \"second_general_text\": {\n                \"type\": \"text\"\n            },\n            \"color\": {\n                \"type\": \"text\"\n            }\n        }\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9200/my_neural_index_multi_vector_fields",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"my_neural_index_multi_vector_fields"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Indices",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9200/_cat/indices",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"_cat",
+								"indices"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete index",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9200/my_neural_index",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"my_neural_index"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get index mappings",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9200/my_neural_index/_mappings",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"my_neural_index",
+								"_mappings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Push document",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"general_text\": \"Final document ten\",\n   \"additional_categorical_text\": \"yellow\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9200/my_neural_index/_doc",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"my_neural_index",
+								"_doc"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Push document bulk",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"create\":{\"_index\":\"my_neural_index\", \"_id\":\"0\"}}\n{\"general_text\":\"The presence of communication amid scientific minds was equally important to the success of the Manhattan Project as scientific intellect was. The only cloud hanging over the impressive achievement of the atomic researchers and engineers is what their success truly meant; hundreds of thousands of innocent lives obliterated.\",\"color\":\"green\"}\n{\"create\":{\"_index\":\"my_neural_index\", \"_id\":\"1\"}}\n{\"general_text\":\"The Manhattan Project and its atomic bomb helped bring an end to World War II. Its legacy of peaceful uses of atomic energy continues to have an impact on history and science.\",\"color\":\"green\"}\n{\"create\":{\"_index\":\"my_neural_index\", \"_id\":\"2\"}}\n{\"general_text\":\"Essay on The Manhattan Project - The Manhattan Project The Manhattan Project was to see if making an atomic bomb possible. The success of this project would forever change the world forever making it known that something this powerful can be manmade.\",\"color\":\"black\"}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9200/my_neural_index/_bulk",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"my_neural_index",
+								"_bulk"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Queries",
+			"item": [
+				{
+					"name": "Get all query",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9200/my_neural_index/_search?",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"my_neural_index",
+								"_search"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Match text query with neural model",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"_source\": [\n        \"color\",\n        \"general_text\"\n    ],\n    \"query\": {\n        \"neural\": {\n            \"general_text_knn\": {\n                \"query_text\": \"define extreme\",\n                \"model_id\": \"TGYn0oQBAmnD50pybv0T\",\n                \"k\": 3\n            }\n        }\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9200/my_neural_index/_search",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"my_neural_index",
+								"_search"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "(post) Filter query with neural model",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"_source\": [\n        \"color\",\n        \"general_text\"\n    ],\n    \"query\": {\n        \"bool\": {\n            \"filter\": {\n                \"term\": {\n                    \"color\": \"white\"\n                }\n            },\n            \"must\": {\n                \"neural\": {\n                    \"general_text_knn\": {\n                        \"query_text\": \"define extreme\",\n                        \"model_id\": \"TGYn0oQBAmnD50pybv0T\",\n                        \"k\": 6\n                    }\n                }\n            }\n        }\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9200/my_neural_index/_search",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"my_neural_index",
+								"_search"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Filter query",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"_source\": [\n        \"color\",\n        \"general_text\"\n    ],\n    \"query\": {\n        \"bool\": {\n            \"filter\": {\n                \"term\": {\n                    \"color\": \"white\"\n                }\n            }\n        }\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9200/my_neural_index/_search",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"my_neural_index",
+								"_search"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Issue",
+			"item": [
+				{
+					"name": "Create neural index defaults",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"settings\": {\n        \"index.knn\": true\n    },\n    \"mappings\": {\n        \"properties\": {\n            \"text_vector\": {\n                \"type\": \"knn_vector\",\n                \"dimension\": 384,\n                \"method\": {\n                    \"name\": \"hnsw\"\n                }\n            }\n        }\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9200/knn_index_defaults",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"knn_index_defaults"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create neural index faiss",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"settings\": {\n        \"index.knn\": true\n    },\n    \"mappings\": {\n        \"properties\": {\n            \"general_text_knn\": {\n                \"type\": \"knn_vector\",\n                \"dimension\": 384,\n                \"method\": {\n                    \"name\": \"hnsw\",\n                    \"engine\": \"faiss\"\n                }\n            }\n        }\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9200/knn_index_faiss",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"knn_index_faiss"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create neural index lucene",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"settings\": {\n        \"index.knn\": true\n    },\n    \"mappings\": {\n        \"properties\": {\n            \"text_vector\": {\n                \"type\": \"knn_vector\",\n                \"dimension\": 384,\n                \"method\": {\n                    \"name\": \"hnsw\",\n                    \"engine\": \"lucene\"\n                }\n            }\n        }\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9200/knn_index_lucene",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"knn_index_lucene"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Inference",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"text_docs\":[\"what is a bank transit number\"],\n    \"return_number\": true,\n    \"target_response\": [\"sentence_embedding\"]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9200/_plugins/_ml/_predict/text_embedding/TGYn0oQBAmnD50pybv0T",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"_plugins",
+								"_ml",
+								"_predict",
+								"text_embedding",
+								"TGYn0oQBAmnD50pybv0T"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "k-NN query",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "admin",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"_source\": \"_id\",\n    \"query\": {\n        \"knn\": {\n            \"text_vector\": {\n                \"vector\": [\n                        -0.01347423,\n                        0.017414903,\n                        -0.0039173877,\n                        0.032335926,\n                        2.7560288E-4,\n                        -0.03876557,\n                        0.050086223,\n                        -0.03409827,\n                        -0.050894387,\n                        -0.051658273,\n                        0.005339164,\n                        -0.0027948886,\n                        0.013953961,\n                        0.086795814,\n                        -0.06999731,\n                        0.073999025,\n                        0.039547835,\n                        -0.008088741,\n                        -0.016162077,\n                        -0.009814845,\n                        0.06741604,\n                        -0.022477632,\n                        0.05722713,\n                        -0.0056699673,\n                        0.028117403,\n                        0.1159441,\n                        0.05872434,\n                        -0.01601084,\n                        -0.06043094,\n                        -0.034257002,\n                        -0.0061350567,\n                        0.05608922,\n                        0.02436838,\n                        -0.01251934,\n                        0.093675144,\n                        0.08284891,\n                        0.060240325,\n                        0.09882934,\n                        0.048458558,\n                        -0.0017049249,\n                        -0.12668769,\n                        -0.103844926,\n                        0.075798556,\n                        0.04016398,\n                        -0.058128122,\n                        -0.0010132662,\n                        -0.013752513,\n                        -0.051123656,\n                        0.02063948,\n                        -0.0053451434,\n                        0.012478608,\n                        -0.04328242,\n                        0.01018427,\n                        -0.011297075,\n                        -8.5566624E-4,\n                        -0.050052993,\n                        0.019431204,\n                        -0.015619755,\n                        0.004985159,\n                        -0.040421426,\n                        0.009001053,\n                        -0.04426121,\n                        -0.051125877,\n                        7.853176E-4,\n                        0.11369033,\n                        -0.010869165,\n                        -0.02525426,\n                        0.029897416,\n                        -0.04745297,\n                        -0.078697555,\n                        0.0890011,\n                        0.04397969,\n                        -0.009285199,\n                        -0.031317264,\n                        0.052657876,\n                        -0.013246838,\n                        0.044428494,\n                        0.00633636,\n                        -0.006648838,\n                        0.012778036,\n                        0.020311002,\n                        -0.013242396,\n                        -0.024550404,\n                        0.06344683,\n                        4.632398E-4,\n                        0.087777525,\n                        -0.08471629,\n                        0.059937418,\n                        -0.009284304,\n                        -0.04919378,\n                        -0.08841946,\n                        -0.055218693,\n                        -0.037229616,\n                        0.008180528,\n                        -0.0439902,\n                        -0.004538755,\n                        -0.010016854,\n                        -0.04369836,\n                        -0.013578881,\n                        0.19445573,\n                        -0.011610276,\n                        -0.019054176,\n                        -0.029018192,\n                        -0.07217427,\n                        0.005293951,\n                        -0.08059359,\n                        -0.002526638,\n                        0.0063304473,\n                        -2.3185421E-4,\n                        0.048032697,\n                        -0.009703362,\n                        -0.060650405,\n                        -0.023896087,\n                        0.04213469,\n                        0.06717229,\n                        -0.08776568,\n                        0.07549273,\n                        0.05917797,\n                        -0.05382562,\n                        -0.12368633,\n                        0.03291696,\n                        0.056906436,\n                        -0.07445962,\n                        0.014844703,\n                        -0.14889178,\n                        -0.04171886,\n                        -0.017735057,\n                        -3.84047E-33,\n                        0.025795106,\n                        0.0076047904,\n                        0.020096807,\n                        0.0645636,\n                        0.040413957,\n                        -0.048308585,\n                        0.014469936,\n                        0.023363063,\n                        -0.034075778,\n                        -0.0015716531,\n                        0.042513147,\n                        -0.07480844,\n                        -0.031259667,\n                        0.029951368,\n                        0.09244408,\n                        -0.049831178,\n                        0.005554845,\n                        0.009763099,\n                        0.002154442,\n                        -0.0306293,\n                        -0.060323447,\n                        -3.15442E-4,\n                        0.04489255,\n                        0.006095246,\n                        -0.005754786,\n                        -0.015385009,\n                        0.051874734,\n                        -0.009232399,\n                        -0.060284983,\n                        0.0028754158,\n                        -0.004914129,\n                        0.12370431,\n                        -0.010425168,\n                        -0.002663966,\n                        7.842639E-4,\n                        0.050723232,\n                        -0.03656238,\n                        -0.08238656,\n                        5.3348346E-4,\n                        -0.011620947,\n                        -0.021616811,\n                        0.06932727,\n                        -0.02084793,\n                        0.038372852,\n                        0.08395116,\n                        0.07680211,\n                        0.023992289,\n                        0.061284445,\n                        0.013487758,\n                        0.0025230292,\n                        1.4511625E-4,\n                        0.06145623,\n                        -0.12605302,\n                        -0.0919337,\n                        0.009237518,\n                        -0.018454868,\n                        0.053576168,\n                        -0.046936557,\n                        0.050593674,\n                        0.072109856,\n                        -0.02349619,\n                        0.08768096,\n                        -0.058451377,\n                        0.055710625,\n                        -0.028703481,\n                        0.04531183,\n                        0.022157328,\n                        -0.015413857,\n                        0.030407056,\n                        0.06747976,\n                        -0.06910477,\n                        -0.03129406,\n                        0.07414021,\n                        -0.029507045,\n                        -0.056552127,\n                        0.014400504,\n                        -0.025505766,\n                        0.0431402,\n                        -0.012090595,\n                        0.012395323,\n                        -0.030551672,\n                        -0.0039772526,\n                        0.10547442,\n                        0.006660379,\n                        0.02268399,\n                        -0.044580337,\n                        -0.02142997,\n                        -0.014900982,\n                        -0.026559621,\n                        0.020410407,\n                        -0.071615346,\n                        -0.079420604,\n                        -0.030867511,\n                        -0.0050947918,\n                        -0.004365369,\n                        2.0544242E-33,\n                        -0.06486509,\n                        -0.052053656,\n                        -0.0019447989,\n                        -0.07307455,\n                        0.037992466,\n                        7.5384346E-4,\n                        -0.11535715,\n                        -0.07794569,\n                        0.017435193,\n                        0.13058326,\n                        -0.051804084,\n                        -0.006294129,\n                        0.07058001,\n                        0.038689297,\n                        -0.02431417,\n                        0.017397335,\n                        0.08611936,\n                        -0.060485087,\n                        -0.0173509,\n                        0.044547588,\n                        0.03994834,\n                        0.051393177,\n                        -0.08064166,\n                        -0.060735475,\n                        -0.048544638,\n                        0.050856896,\n                        0.038963865,\n                        -0.03893456,\n                        0.0030597239,\n                        -0.0046186866,\n                        -0.020564878,\n                        -0.09513816,\n                        -0.08631627,\n                        -0.041621413,\n                        -0.03303566,\n                        0.09272067,\n                        0.0031034942,\n                        -0.04465653,\n                        -0.02361422,\n                        -0.09299112,\n                        0.035184808,\n                        -0.024089195,\n                        -0.045589168,\n                        0.07128763,\n                        -0.0036795605,\n                        -0.025673946,\n                        -0.036656126,\n                        0.0480995,\n                        -0.04416018,\n                        0.011305736,\n                        -0.07866369,\n                        0.054231673,\n                        -0.026832886,\n                        -0.06559824,\n                        0.037077736,\n                        -0.036419645,\n                        -0.034827877,\n                        0.024736233,\n                        0.059873298,\n                        -0.029208547,\n                        -0.058038514,\n                        -0.018316234,\n                        0.0022021185,\n                        0.09458479,\n                        -0.031702343,\n                        -0.037718505,\n                        0.0020546624,\n                        -0.0062003196,\n                        0.03830132,\n                        0.03386281,\n                        0.028362162,\n                        0.1361894,\n                        0.018435705,\n                        0.017331684,\n                        -0.06404999,\n                        -0.09868095,\n                        -0.02591006,\n                        0.062602624,\n                        -0.019340785,\n                        0.052910086,\n                        0.041640364,\n                        -0.014159561,\n                        0.035020918,\n                        0.03185107,\n                        0.15737034,\n                        0.06900831,\n                        0.070714206,\n                        0.04960803,\n                        -0.019034658,\n                        0.0025316468,\n                        1.4745559E-4,\n                        0.05697869,\n                        -0.005810588,\n                        -0.02201894,\n                        -0.036553286,\n                        -1.259765E-8,\n                        0.019496249,\n                        0.021167198,\n                        -0.052912813,\n                        -0.07868165,\n                        -0.045158282,\n                        -0.059891272,\n                        -0.0113813495,\n                        0.05544634,\n                        0.031768177,\n                        0.049664207,\n                        0.01111058,\n                        0.051071506,\n                        0.04376268,\n                        0.08366318,\n                        -0.0666868,\n                        -0.07235204,\n                        0.064566284,\n                        0.013459091,\n                        -0.029299656,\n                        0.018516043,\n                        0.020169703,\n                        0.01439553,\n                        0.058045313,\n                        0.024241451,\n                        0.0029095227,\n                        0.030701451,\n                        0.010994634,\n                        0.012603229,\n                        0.012985224,\n                        -0.0020722377,\n                        -0.028333291,\n                        0.04922909,\n                        -0.06519021,\n                        -0.03187057,\n                        0.036946096,\n                        -0.012148909,\n                        -0.017782606,\n                        0.017170513,\n                        0.05473899,\n                        -0.06115026,\n                        -0.07502529,\n                        0.030156294,\n                        0.009046001,\n                        0.08540956,\n                        0.023362027,\n                        0.01062723,\n                        -0.09865065,\n                        -0.06320817,\n                        -3.4477256E-4,\n                        -0.017401092,\n                        -0.056916997,\n                        0.004936549,\n                        0.02247877,\n                        0.010428466,\n                        0.10017759,\n                        0.042133782,\n                        -0.020977836,\n                        0.007219089,\n                        -0.101018585,\n                        0.051993527,\n                        0.09625134,\n                        -0.019316573,\n                        -0.07415398,\n                        0.0078814775\n                    ],\n                    \"k\": 2\n            }\n        }\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9200/knn_index_defaults/_search",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9200",
+							"path": [
+								"knn_index_defaults",
+								"_search"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Delete tasks",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "admin",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9200/_tasks/_cancel",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9200",
+					"path": [
+						"_tasks",
+						"_cancel"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
