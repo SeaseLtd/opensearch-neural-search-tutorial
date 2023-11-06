@@ -6,7 +6,7 @@ For a step-by-step description read our blog post.
 
 ## Requirements ##
 To directly use the existing material, without generating documents and models by yourself, you only need:
-- OpenSearch 2.5.0
+- OpenSearch 2.11.0
 
 To create documents by yourself you also need:
 - python 3.10
