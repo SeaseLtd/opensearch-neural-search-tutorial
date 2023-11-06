@@ -22,7 +22,6 @@ Set up your Docker host environment:
 - Linux: Ensure vm.max_map_count is set to at least 262144 as per the documentation.
 We download the docker-compose.yml file from: [https://opensearch.org/downloads.html](https://opensearch.org/downloads.html)
 
-Check the prerequisites: 
 ### To generate the documents ###
 **You can skip this step if you want to use the already provided material.**
 
