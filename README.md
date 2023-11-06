@@ -20,7 +20,7 @@ To create documents by yourself you also need:
 Set up your Docker host environment:
 - macOS & Windows: In Docker Preferences > Resources, set RAM to at least 4 GB.
 - Linux: Ensure vm.max_map_count is set to at least 262144 as per the documentation.
-We download the docker-compose.yml file from: [https://opensearch.org/downloads.html](https://opensearch.org/downloads.html)
+Verify to meet all the installation requirements: [https://opensearch.org/docs/latest/install-and-configure/install-opensearch/index/](https://opensearch.org/docs/latest/install-and-configure/install-opensearch/index/)
 
 ### To generate the documents ###
 **You can skip this step if you want to use the already provided material.**
@@ -30,7 +30,7 @@ To generate documents:
 python convert_msmarco_data_to_opensearch_format.py
 ````
 ### To start OpenSearch ###
-To start OpenSearch:
+From the folder containing the [docker-compose.yml](docker-compose.yml) file, start OpenSearch with:
 ````
 docker-compose up
 ````
