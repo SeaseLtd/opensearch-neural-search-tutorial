@@ -20,6 +20,7 @@ To create documents by yourself you also need:
 Set up your Docker host environment:
 - macOS & Windows: In Docker Preferences > Resources, set RAM to at least 4 GB.
 - Linux: Ensure vm.max_map_count is set to at least 262144 as per the documentation.
+
 Verify to meet all the installation requirements: [https://opensearch.org/docs/latest/install-and-configure/install-opensearch/index/](https://opensearch.org/docs/latest/install-and-configure/install-opensearch/index/)
 
 ### To generate the documents ###
